@@ -25,7 +25,7 @@
       </plugin>
     </plugins>
   </build>
-  
+  <distributionManagement>
 	
 	    <repository>
 	      <id>nexus</id>
@@ -38,6 +38,7 @@
 	      <name>wallmart-snapshot</name>
 	      <url>http://52.66.252.102:8081/repository/wallmart-snapshot/</url>
 	    </snapshotRepository>
+	  </distributionManagement>
     
   <properties>
 <sonar.host.url>http://13.126.31.239:9000/</sonar.host.url>
