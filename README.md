@@ -1,4 +1,4 @@
-# Demo Java Web Apps
+# Demo Java Web Appss
 
 [![BoltOps Badge](https://img.boltops.com/boltops/badges/boltops-badge.png)](https://www.boltops.com)
 
