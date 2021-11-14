@@ -1,0 +1,28 @@
+node
+{
+    def mavenHome=tool name:"maven3.8.3"
+    stage('checkoutcode')
+    {
+        git credentialsId: '12f1d943-59fd-46c9-9ebb-e6d1d3e2c02e', url: 'https://github.com/manojkmk/web-apps.git'
+    }
+     stage('build')
+     {
+         sh "${mavenHome}/bin/mvn clean package"
+     }
+    /* stage('sonarqube')
+     {
+         sh "${mavenHome}/bin/mvn sonar:sonar"
+     }
+      stage('nexus')
+     {
+         sh "${mavenHome}/bin/mvn deploy"
+     }
+     stage('deploy')
+     {
+         deploy adapters: [tomcat9(credentialsId: '5e56e9db-9d26-49f8-b0bf-c47fc6b17929', path: '', url: 'http://15.206.171.101:8080/')], contextPath: null, war: '**/demo.war'
+     }
+     stage('mail')
+     {
+         mail bcc: '', body: 'manoj', cc: '', from: '', replyTo: '', subject: 'Build manoj', to: 'kandalakrishnabsf@gmail.com'
+     } */
+}
