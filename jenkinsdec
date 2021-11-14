@@ -1,0 +1,63 @@
+pipeline
+{
+    agent any
+    tools
+    {
+        maven 'maven3.8.3'
+    }
+    options
+    {
+        timestamps()
+        buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5'))
+    }
+    stages
+    {
+        stage('checkoutcode')
+        {
+            steps
+            {
+                git credentialsId: '12f1d943-59fd-46c9-9ebb-e6d1d3e2c02e', url: 'https://github.com/manojkmk/web-apps.git'
+            }
+        }
+        stage('build')
+        {
+            steps
+            {
+                sh "mvn clean package"
+            }
+        }
+        stage('sonaqube')
+        {
+            steps
+            {
+                sh "mvn clean sonar:sonar"
+            }
+        }
+        stage('nexus')
+        {
+            steps
+            {
+                sh "mvn deploy"
+            }
+        }
+        stage('deployintotomcat')
+        {
+            steps
+            {
+                 deploy adapters: [tomcat9(credentialsId: '5e56e9db-9d26-49f8-b0bf-c47fc6b17929', path: '', url: 'http://52.66.196.99:8080/')], contextPath: null, war: '**/demo.war'
+            }
+        }
+        
+    }
+    post
+    {
+        success
+        {
+            mail bcc: '', body: 'manoj', cc: '', from: '', replyTo: '', subject: 'Build success', to: 'kandalakrishnabsf@gmail.com'
+        }
+        failure
+        {
+            mail bcc: '', body: 'manoj', cc: '', from: '', replyTo: '', subject: 'Build failure', to: 'kandalakrishnabsf@gmail.com'
+        }
+    }
+}
