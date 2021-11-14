@@ -20,7 +20,7 @@ node
      }
      stage('deploy')
      {
-         //deploy adapters: [tomcat9(credentialsId: '5e56e9db-9d26-49f8-b0bf-c47fc6b17929', path: '', url: 'http://15.206.171.101:8080/')], contextPath: null, war: '**/demo.war'
+         
      }
      stage('mail')
      {
