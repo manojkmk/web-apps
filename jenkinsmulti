@@ -1,0 +1,12 @@
+node
+{
+    def mavenHome=tool name:"maven3.8.3"
+    stage('checkoutcode')
+    {
+        git credentialsId: '12f1d943-59fd-46c9-9ebb-e6d1d3e2c02e', url: 'https://github.com/manojkmk/web-apps.git'
+    }
+     stage('build')
+     {
+         sh "${mavenHome}/bin/mvn clean package"
+     } 
+  }
